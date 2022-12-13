@@ -22,7 +22,9 @@ export class Search{
             await this.api.loadRepos(searchValue).then((res) => {
                 res.json().then((res) => {
                     let reposCount = res.total_count;
-                    res.items.forEach((repo) => this.view.createSelectItem(repo));
+                    if (reposCount > 0) {
+                        res.items.forEach((repo) => this.view.createSelectItem(repo));
+                    }
                     this.view.message.textContent = reposCount > 0 ? '' : 'По вашему запросу репозиториев не найдено';                    
                 });
             });
